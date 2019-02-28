@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ExpandView">
+        <attr name="expand_expanded" format="boolean" />
+        <attr name="expand_text_appearance" format="reference" />
+        <attr name="expand_text_color" format="color" />
+        <attr name="expand_icon_color" format="color" />
+        <attr name="expand_more_text" format="string" />
+        <attr name="expand_more_icon" format="reference" />
+        <attr name="expand_less_text" format="string" />
+        <attr name="expand_less_icon" format="reference" />
+    </declare-styleable>
+
+</resources>
