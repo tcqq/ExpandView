@@ -8,7 +8,6 @@ Widget for showing collapsed or expanded state.
 # Usage
 Supported attributes with _default_ values:
 ``` 
-xml
 <com.tcqq.expandview.ExpandView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android usual attrs
@@ -16,7 +15,7 @@ xml
 ```
 |**Attrs**|**Default** |
 |:---|:---|
-| `expand_expanded"` | `false`
+| `expand_expanded` | `false`
 | `expand_text_appearance` | `@style/TextAppearance.MaterialComponents.Button`
 | `expand_text_color` | `?attr/colorSecondary`
 | `expand_icon_color` | `?attr/colorSecondary`
