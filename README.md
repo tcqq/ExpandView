@@ -1,4 +1,5 @@
 [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
+[ ![Download](https://api.bintray.com/packages/tcqq/android/expandview/images/download.svg?version=1.0.0) ](https://bintray.com/tcqq/android/expandview/1.0.0/link)
 [![Licence](https://img.shields.io/badge/Licence-Apache2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 # ExpandView
@@ -8,7 +9,6 @@ Widget for showing collapsed or expanded state.
 # Usage
 Supported attributes with _default_ values:
 ``` 
-xml
 <com.tcqq.expandview.ExpandView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android usual attrs
@@ -16,7 +16,7 @@ xml
 ```
 |**Attrs**|**Default** |
 |:---|:---|
-| `expand_expanded"` | `false`
+| `expand_expanded` | `false`
 | `expand_text_appearance` | `@style/TextAppearance.MaterialComponents.Button`
 | `expand_text_color` | `?attr/colorSecondary`
 | `expand_icon_color` | `?attr/colorSecondary`
