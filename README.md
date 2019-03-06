@@ -35,7 +35,7 @@ repositories {
 ```
 dependencies {
     // Using JCenter
-    implementation 'com.tcqq.android:expandview:1.0.0'
+    implementation 'com.tcqq.android:expandview:2.0.0'
 }
 ```
 

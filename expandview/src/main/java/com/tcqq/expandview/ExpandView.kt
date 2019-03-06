@@ -34,9 +34,11 @@ class ExpandView
             if (value) {
                 expand_text.text = moreText
                 expand_icon.setImageDrawable(ContextCompat.getDrawable(context, moreIcon))
+                onExpandChangedListener?.onExpandChanged(this, true)
             } else {
                 expand_text.text = lessText
                 expand_icon.setImageDrawable(ContextCompat.getDrawable(context, lessIcon))
+                onExpandChangedListener?.onExpandChanged(this, false)
             }
             field = value
         }
@@ -58,6 +60,16 @@ class ExpandView
             expand_icon.setColorFilter(value)
             field = value
         }
+
+    private var onExpandChangedListener: OnExpandChangedListener? = null
+
+    fun addOnExpandChangedListener(listener: OnExpandChangedListener) {
+        onExpandChangedListener = listener
+    }
+
+    interface OnExpandChangedListener {
+        fun onExpandChanged(view: ExpandView, expanded: Boolean)
+    }
 
     companion object {
         private const val DEFAULT_EXPANDED = false

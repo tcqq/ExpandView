@@ -1,8 +1,10 @@
 package com.example.expandview
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.tcqq.expandview.ExpandView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        introduction_expand.addOnExpandChangedListener(object: ExpandView.OnExpandChangedListener {
+            override fun onExpandChanged(view: ExpandView, expanded: Boolean) {
+                Log.d("MainActivity", "expanded: $expanded")
+            }
+        })
     }
 
     private fun introductionExpand(switched: Boolean) {
