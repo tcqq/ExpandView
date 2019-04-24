@@ -49,13 +49,13 @@ class ExpandView
             field = value
         }
     @ColorInt
-    var expandTextColor: Int = getSecondaryColor(context)
+    var expandTextColor: Int = primaryColor(context)
         set(value) {
             expand_text.setTextColor(value)
             field = value
         }
     @ColorInt
-    var expandIconColor: Int = getSecondaryColor(context)
+    var expandIconColor: Int = primaryColor(context)
         set(value) {
             expand_icon.setColorFilter(value)
             field = value
@@ -93,11 +93,11 @@ class ExpandView
         val expanded = a.getBoolean(R.styleable.ExpandView_expand_expanded, DEFAULT_EXPANDED)
         val expandTextAppearance =
             a.getResourceId(R.styleable.ExpandView_expand_text_appearance, DEFAULT_EXPAND_TEXT_APPEARANCE)
-        val expandTextColor = a.getColor(R.styleable.ExpandView_expand_text_color, getSecondaryColor(context))
-        val expandIconColor = a.getColor(R.styleable.ExpandView_expand_icon_color, getSecondaryColor(context))
+        val expandTextColor = a.getColor(R.styleable.ExpandView_expand_text_color, primaryColor(context))
+        val expandIconColor = a.getColor(R.styleable.ExpandView_expand_icon_color, primaryColor(context))
         a.recycle()
 
-        orientation = LinearLayout.HORIZONTAL
+        orientation = HORIZONTAL
         gravity = Gravity.CENTER
 
         val inflater = context
@@ -115,9 +115,9 @@ class ExpandView
     }
 
     @ColorInt
-    private fun getSecondaryColor(context: Context): Int {
+    private fun primaryColor(context: Context): Int {
         val value = TypedValue()
-        context.theme.resolveAttribute(R.attr.colorSecondary, value, true)
+        context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
         return value.data
     }
 
