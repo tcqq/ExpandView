@@ -16,7 +16,7 @@ import androidx.core.widget.TextViewCompat
 import kotlinx.android.synthetic.main.view_see_more.view.*
 
 /**
- * @author Alan Dreamer
+ * @author Alan Perry
  * @since 2019-02-28 Created
  */
 class ExpandView
