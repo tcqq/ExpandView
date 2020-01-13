@@ -4,14 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 4
-        versionName "2.0.0"
+        versionName "2.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,17 +31,17 @@ dependencies {
 
     //Test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Google
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
 
     //AndroidX
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     //Kotlin
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.30'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61'
 }
 
 publish {
@@ -49,7 +49,7 @@ publish {
     groupId = 'com.tcqq.android'
     artifactId = 'expandview'
     repoName = 'android'
-    publishVersion = '2.0.0'
+    publishVersion = '2.1.1'
     desc = 'Widget for showing collapsed or expanded state.'
     website = 'https://github.com/tcqq/expandview'
 }

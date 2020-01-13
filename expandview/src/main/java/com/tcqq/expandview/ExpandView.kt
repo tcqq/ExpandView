@@ -7,20 +7,23 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
-import kotlinx.android.synthetic.main.view_see_more.view.*
+import kotlinx.android.synthetic.main.view_expand.view.*
 
 /**
  * @author Alan Perry
  * @since 2019-02-28 Created
  */
 class ExpandView
-@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
+@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+    LinearLayout(context, attrs),
+    View.OnClickListener {
 
     private var moreText: String
     @DrawableRes
@@ -28,7 +31,6 @@ class ExpandView
     private var lessText: String
     @DrawableRes
     private var lessIcon: Int
-
     var expanded: Boolean = false
         set(value) {
             if (value) {
@@ -42,6 +44,7 @@ class ExpandView
             }
             field = value
         }
+
     @StyleRes
     var expandTextAppearance: Int = DEFAULT_EXPAND_TEXT_APPEARANCE
         set(value) {
@@ -73,7 +76,8 @@ class ExpandView
 
     companion object {
         private const val DEFAULT_EXPANDED = false
-        private val DEFAULT_EXPAND_TEXT_APPEARANCE = R.style.TextAppearance_MaterialComponents_Button
+        private val DEFAULT_EXPAND_TEXT_APPEARANCE =
+            R.style.TextAppearance_MaterialComponents_Button
         private const val DEFAULT_MORE_TEXT = "See less"
         private val DEFAULT_MORE_ICON = R.drawable.ic_expand_less_black_24dp
         private const val DEFAULT_LESS_TEXT = "See more"
@@ -92,9 +96,14 @@ class ExpandView
         val lessIcon = a.getResourceId(R.styleable.ExpandView_expand_less_icon, DEFAULT_LESS_ICON)
         val expanded = a.getBoolean(R.styleable.ExpandView_expand_expanded, DEFAULT_EXPANDED)
         val expandTextAppearance =
-            a.getResourceId(R.styleable.ExpandView_expand_text_appearance, DEFAULT_EXPAND_TEXT_APPEARANCE)
-        val expandTextColor = a.getColor(R.styleable.ExpandView_expand_text_color, primaryColor(context))
-        val expandIconColor = a.getColor(R.styleable.ExpandView_expand_icon_color, primaryColor(context))
+            a.getResourceId(
+                R.styleable.ExpandView_expand_text_appearance,
+                DEFAULT_EXPAND_TEXT_APPEARANCE
+            )
+        val expandTextColor =
+            a.getColor(R.styleable.ExpandView_expand_text_color, primaryColor(context))
+        val expandIconColor =
+            a.getColor(R.styleable.ExpandView_expand_icon_color, primaryColor(context))
         a.recycle()
 
         orientation = HORIZONTAL
@@ -102,7 +111,9 @@ class ExpandView
 
         val inflater = context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.view_see_more, this, true)
+        inflater.inflate(R.layout.view_expand, this, true)
+
+        setOnClickListener(this)
 
         this.moreText = moreText
         this.moreIcon = moreIcon
@@ -119,6 +130,10 @@ class ExpandView
         val value = TypedValue()
         context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
         return value.data
+    }
+
+    override fun onClick(view: View?) {
+        expanded = !expanded
     }
 
     public override fun onSaveInstanceState(): Parcelable? {
