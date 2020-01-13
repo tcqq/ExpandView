@@ -11,7 +11,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 29
         versionCode 4
-        versionName "2.1.1"
+        versionName "3.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -49,7 +49,7 @@ publish {
     groupId = 'com.tcqq.android'
     artifactId = 'expandview'
     repoName = 'android'
-    publishVersion = '2.1.1'
+    publishVersion = '3.0.0'
     desc = 'Widget for showing collapsed or expanded state.'
     website = 'https://github.com/tcqq/expandview'
 }

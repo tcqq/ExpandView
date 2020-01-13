@@ -66,7 +66,7 @@ class ExpandView
 
     private var onExpandChangedListener: OnExpandChangedListener? = null
 
-    fun addOnExpandChangedListener(listener: OnExpandChangedListener) {
+    fun setOnExpandChangedListener(listener: OnExpandChangedListener) {
         onExpandChangedListener = listener
     }
 

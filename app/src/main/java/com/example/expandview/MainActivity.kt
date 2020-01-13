@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(),
                 introduction_expand.isVisible = true
             }
         }
-        introduction_expand.addOnExpandChangedListener(this)
+        introduction_expand.setOnExpandChangedListener(this)
     }
 
     override fun onExpandChanged(view: ExpandView, expanded: Boolean) {
