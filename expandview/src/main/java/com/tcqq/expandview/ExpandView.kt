@@ -1,8 +1,6 @@
 package com.tcqq.expandview
 
 import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -26,9 +24,11 @@ class ExpandView
     View.OnClickListener {
 
     private var moreText: String
+
     @DrawableRes
     private var moreIcon: Int
     private var lessText: String
+
     @DrawableRes
     private var lessIcon: Int
     var expanded: Boolean = false
@@ -51,12 +51,14 @@ class ExpandView
             TextViewCompat.setTextAppearance(expand_text, expandTextAppearance)
             field = value
         }
+
     @ColorInt
     var expandTextColor: Int = primaryColor(context)
         set(value) {
             expand_text.setTextColor(value)
             field = value
         }
+
     @ColorInt
     var expandIconColor: Int = primaryColor(context)
         set(value) {
@@ -134,59 +136,5 @@ class ExpandView
 
     override fun onClick(view: View?) {
         expanded = !expanded
-    }
-
-    public override fun onSaveInstanceState(): Parcelable? {
-        val savedState = SavedState(super.onSaveInstanceState()!!)
-        savedState.moreText = moreText
-        savedState.moreIcon = moreIcon
-        savedState.expanded = expanded
-        return savedState
-    }
-
-    public override fun onRestoreInstanceState(state: Parcelable) {
-        if (state is SavedState) {
-            super.onRestoreInstanceState(state.superState)
-            moreText = state.moreText
-            moreIcon = state.moreIcon
-            expanded = state.expanded
-        } else {
-            super.onRestoreInstanceState(state)
-        }
-    }
-
-    internal class SavedState : BaseSavedState {
-
-        var moreText = DEFAULT_MORE_TEXT
-        var moreIcon: Int = R.drawable.ic_expand_less_black_24dp
-        var expanded: Boolean = DEFAULT_EXPANDED
-
-        constructor(source: Parcel) : super(source) {
-            moreText = source.readString()!!
-            moreIcon = source.readInt()
-            expanded = source.readByte().toInt() != 0
-        }
-
-        constructor(superState: Parcelable) : super(superState)
-
-        override fun writeToParcel(out: Parcel, flags: Int) {
-            super.writeToParcel(out, flags)
-            out.writeString(moreText)
-            out.writeInt(moreIcon)
-            out.writeByte((if (expanded) 1 else 0).toByte())
-        }
-
-        companion object {
-            @JvmField
-            val CREATOR = object : Parcelable.Creator<SavedState> {
-                override fun createFromParcel(source: Parcel): SavedState {
-                    return SavedState(source)
-                }
-
-                override fun newArray(size: Int): Array<SavedState?> {
-                    return arrayOfNulls(size)
-                }
-            }
-        }
     }
 }

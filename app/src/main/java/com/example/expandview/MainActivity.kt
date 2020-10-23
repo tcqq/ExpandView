@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        expand(introduction_expand.expanded)
+        expand(false)
         introduction.post {
             val lineCount = introduction.lineCount
             if (lineCount > INTRODUCTION_MAX_LINE) {
