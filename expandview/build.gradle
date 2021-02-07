@@ -1,7 +1,10 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.github.panpf.bintray-publish'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+group='com.github.tcqq'
 
 android {
     compileSdkVersion 30
@@ -48,14 +51,4 @@ dependencies {
 
     //Kotlin
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'
-}
-
-publish {
-    userOrg = 'tcqq'
-    groupId = 'com.tcqq.android'
-    artifactId = 'expandview'
-    repoName = 'android'
-    publishVersion = '3.0.1'
-    desc = 'Widget for showing collapsed or expanded state.'
-    website = 'https://github.com/tcqq/expandview'
 }
