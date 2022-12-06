@@ -35,7 +35,7 @@ repositories {
 ```
 dependencies {
     // Using JitPack
-    implementation 'com.github.tcqq:expandview:3.0.1'
+    implementation 'com.github.tcqq:expandview:3.1.0'
 }
 ```
 
