@@ -12,7 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
-import kotlinx.android.synthetic.main.view_expand.view.*
+import com.tcqq.expandview.databinding.ViewExpandBinding
 
 /**
  * @author Perry Lance
@@ -23,6 +23,8 @@ class ExpandView
     LinearLayout(context, attrs),
     View.OnClickListener {
 
+    private var binding: ViewExpandBinding
+
     private var moreText: String
 
     @DrawableRes
@@ -31,40 +33,44 @@ class ExpandView
 
     @DrawableRes
     private var lessIcon: Int
-    var expanded: Boolean = false
-        set(value) {
-            if (value) {
-                expand_text.text = moreText
-                expand_icon.setImageDrawable(ContextCompat.getDrawable(context, moreIcon))
-                onExpandChangedListener?.onExpandChanged(this, true)
-            } else {
-                expand_text.text = lessText
-                expand_icon.setImageDrawable(ContextCompat.getDrawable(context, lessIcon))
-                onExpandChangedListener?.onExpandChanged(this, false)
-            }
-            field = value
-        }
+    private var expanded: Boolean = false
 
     @StyleRes
     var expandTextAppearance: Int = DEFAULT_EXPAND_TEXT_APPEARANCE
         set(value) {
-            TextViewCompat.setTextAppearance(expand_text, expandTextAppearance)
+            TextViewCompat.setTextAppearance(binding.expandText, expandTextAppearance)
             field = value
         }
 
     @ColorInt
     var expandTextColor: Int = primaryColor(context)
         set(value) {
-            expand_text.setTextColor(value)
+            binding.expandText.setTextColor(value)
             field = value
         }
 
     @ColorInt
     var expandIconColor: Int = primaryColor(context)
         set(value) {
-            expand_icon.setColorFilter(value)
+            binding.expandIcon.setColorFilter(value)
             field = value
         }
+
+    fun setExpanded(expanded: Boolean, withoutListener: Boolean = false) {
+        binding.expandText.text = if (expanded) moreText else lessText
+        binding.expandIcon.setImageDrawable(
+            ContextCompat.getDrawable(
+                context,
+                if (expanded) moreIcon else lessIcon
+            )
+        )
+        if (withoutListener.not()) onExpandChangedListener?.onExpandChanged(this, expanded)
+        this.expanded = expanded
+    }
+
+    fun getExpanded(): Boolean {
+        return expanded
+    }
 
     private var onExpandChangedListener: OnExpandChangedListener? = null
 
@@ -74,16 +80,6 @@ class ExpandView
 
     interface OnExpandChangedListener {
         fun onExpandChanged(view: ExpandView, expanded: Boolean)
-    }
-
-    companion object {
-        private const val DEFAULT_EXPANDED = false
-        private val DEFAULT_EXPAND_TEXT_APPEARANCE =
-            R.style.TextAppearance_MaterialComponents_Button
-        private const val DEFAULT_MORE_TEXT = "See less"
-        private val DEFAULT_MORE_ICON = R.drawable.ic_expand_less_black_24dp
-        private const val DEFAULT_LESS_TEXT = "See more"
-        private val DEFAULT_LESS_ICON = R.drawable.ic_expand_more_black_24dp
     }
 
     init {
@@ -108,12 +104,10 @@ class ExpandView
             a.getColor(R.styleable.ExpandView_expand_icon_color, primaryColor(context))
         a.recycle()
 
+        binding = ViewExpandBinding.inflate(LayoutInflater.from(context), this, true)
+
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
-
-        val inflater = context
-            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.view_expand, this, true)
 
         setOnClickListener(this)
 
@@ -121,10 +115,10 @@ class ExpandView
         this.moreIcon = moreIcon
         this.lessText = lessText
         this.lessIcon = lessIcon
-        this.expanded = expanded
         this.expandTextAppearance = expandTextAppearance
         this.expandTextColor = expandTextColor
         this.expandIconColor = expandIconColor
+        setExpanded(expanded)
     }
 
     @ColorInt
@@ -135,6 +129,16 @@ class ExpandView
     }
 
     override fun onClick(view: View?) {
-        expanded = !expanded
+        setExpanded(expanded.not())
+    }
+
+    companion object {
+        private const val DEFAULT_EXPANDED = false
+        private val DEFAULT_EXPAND_TEXT_APPEARANCE =
+            R.style.TextAppearance_MaterialComponents_Button
+        private const val DEFAULT_MORE_TEXT = "See less"
+        private val DEFAULT_MORE_ICON = R.drawable.ic_expand_less_black_24dp
+        private const val DEFAULT_LESS_TEXT = "See more"
+        private val DEFAULT_LESS_ICON = R.drawable.ic_expand_more_black_24dp
     }
 }

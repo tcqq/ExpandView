@@ -3,27 +3,26 @@ package com.example.expandview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
+import com.example.expandview.databinding.ActivityMainBinding
 import com.tcqq.expandview.ExpandView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),
     ExpandView.OnExpandChangedListener {
 
-    companion object {
-        private const val INTRODUCTION_MAX_LINE = 5
-    }
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         expand(false)
-        introduction.post {
-            val lineCount = introduction.lineCount
+        binding.introduction.post {
+            val lineCount = binding.introduction.lineCount
             if (lineCount > INTRODUCTION_MAX_LINE) {
-                introduction_expand.isVisible = true
+                binding.introductionExpand.isVisible = true
             }
         }
-        introduction_expand.setOnExpandChangedListener(this)
+        binding.introductionExpand.setOnExpandChangedListener(this)
     }
 
     override fun onExpandChanged(view: ExpandView, expanded: Boolean) {
@@ -31,6 +30,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun expand(expanded: Boolean) {
-        introduction.maxLines = if (expanded) Integer.MAX_VALUE else INTRODUCTION_MAX_LINE
+        binding.introduction.maxLines = if (expanded) Integer.MAX_VALUE else INTRODUCTION_MAX_LINE
+    }
+
+    companion object {
+        private const val INTRODUCTION_MAX_LINE = 5
     }
 }
