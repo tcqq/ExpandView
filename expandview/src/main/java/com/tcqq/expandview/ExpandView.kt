@@ -57,6 +57,7 @@ class ExpandView
         }
 
     fun setExpanded(expanded: Boolean, withoutListener: Boolean = false) {
+        this.expanded = expanded
         binding.expandText.text = if (expanded) moreText else lessText
         binding.expandIcon.setImageDrawable(
             ContextCompat.getDrawable(
@@ -65,7 +66,6 @@ class ExpandView
             )
         )
         if (withoutListener.not()) onExpandChangedListener?.onExpandChanged(this, expanded)
-        this.expanded = expanded
     }
 
     fun getExpanded(): Boolean {
